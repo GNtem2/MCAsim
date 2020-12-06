@@ -1,0 +1,76 @@
+---
+title: "MCAsim"
+author: "gntem2"
+date: "22 January 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+```{r data, echo=FALSE}
+library(plotly)
+nm <- load("../../ClotRetrieval/AcomSim/computer_long_format190118.Rda")
+```
+
+##The experiments belows involve simulation of occluding different part of the anterior circulation
+
+```{r classical cow}
+
+#dima.inter==1
+cow<- filter(mcaTreesRatioLong, CoW == "typical", diam.inter==0.001, diam.intra==0.001)
+
+gg <- ggplot(cow, aes(flowratiostroke, ArteryName,color = ArteryName)) +
+      geom_point(aes(size=flowratiostroke,frame=Experiment)) +xlim(-5,5)+
+    scale_x_continuous()
+    ggplotly(gg)
+
+```
+
+## Acom missing
+```{r acom}
+
+#dima.inter==1
+cowAcom<- filter(mcaTreesRatioLong, CoW == "Acom", diam.inter==0.001, diam.intra==0.001)
+
+gg <- ggplot(cowAcom, aes(flowratiostroke, ArteryName,color = ArteryName)) +
+      geom_point(aes(size=flowratiostroke,frame=Experiment)) +xlim(-5,5)+
+    scale_x_continuous()
+    ggplotly(gg)
+
+```
+# A1 missing
+
+```{r a1}
+
+#dima.inter==1
+cowA1<- filter(mcaTreesRatioLong, CoW == "LeftA1", diam.inter==0.001, diam.intra==0.001)
+
+gg <- ggplot(cowA1, aes(flowratiostroke, ArteryName,color = ArteryName)) +
+      geom_point(aes(size=flowratiostroke,frame=Experiment)) +xlim(-5,5)+
+    scale_x_continuous()
+    ggplotly(gg)
+
+```
+
+```{r a1p1}
+
+#dima.inter==1
+cowA1P1<- filter(mcaTreesRatioLong, CoW == "LeftA1LeftP1", diam.inter==0.001, diam.intra==0.001)
+
+gg <- ggplot(cowA1P1, aes(flowratiostroke, ArteryName,color = ArteryName)) +
+      geom_point(aes(size=flowratiostroke,frame=Experiment)) +xlim(-5,5)+
+    scale_x_continuous()
+    ggplotly(gg)
+
+```
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
